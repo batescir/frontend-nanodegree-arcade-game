@@ -1,16 +1,25 @@
+//grid 505x536
+//101x83 - ever other move
+//sharded area start
+
 // Enemies our player must avoid
-var Enemy = function(startX, startY, speed) {
+var Enemy = function(startX, startY) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-    this.x = startX;
+    //randomize start
+    this.x = Math.floor((Math.random() * 5) + 0) * 101;
     this.y = startY;
-
-    //randomize speed
-
+    //randomize speed(make this vary everytime Enemy is drawn)
+    this.speed = Math.floor((Math.random() * 400) + 100);
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.step = 101;
+    //grid measurment
+    this.horiz = 101;
+    //Left boundary
+    this.left = -101;
+    //right boundary
+    this.right = this.horiz * 5;
 };
 
 // Update the enemy's position, required method for game
@@ -19,9 +28,13 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    if(this.x < this.step * 5) {
+    if(this.x < this.right) {
       //test boundary check the 10 value
-      this.x += 10 * dt;
+      this.x += this.speed * dt;
+    }
+    else {
+      this.speed = Math.floor((Math.random() * 400) + 100);
+      this.x = this.left;
     }
     // if enemy still inbounds
       //move forward
@@ -39,10 +52,10 @@ Enemy.prototype.render = function() {
 
 class playerOne {
   constructor() {
-    this.step = 100;
-    this.jump = 80;
-    this.startX = this.step * 2;
-    this.startY = this.jump * 5 + 30;
+    this.horiz = 101;
+    this.vert = 83;
+    this.startX = this.horiz * 2;
+    this.startY = this.vert * 5;
     this.x = this.startX;
     this.y = this.startY;
     console.log(this.x);
@@ -54,25 +67,25 @@ class playerOne {
     if(input === 'left'){
       if(this.x > 0){
       //checkboundry
-      this.x -= this.step;
+      this.x -= this.horiz;
     }
     }
     if(input === 'right'){
-      if (this.x < this.step * 4){
+      if (this.x < this.horiz * 4){
       //checkboundry
-      this.x += this.step;
+      this.x += this.horiz;
       }
     }
     if(input === 'up'){
-      if(this.y > this.jump){
+      if(this.y > this.vert){
       //checkboundry
-      this.y -= this.jump;
+      this.y -= this.vert;
       }
     }
     if(input === 'down'){
-      if(this.y < this.jump * 5 - 20){
+      if(this.y < this.vert * 5){
       //checkboundry
-      this.y += this.jump;
+      this.y += this.vert;
       }
     }
   }
@@ -83,13 +96,26 @@ class playerOne {
   // keyboard inputs
 }
 
+playerOne.prototype.update = function(){
+  //console.log(this.x);
+  for(let enemy of allEnemies){
+    if(this.y === enemy.y && (enemy.x + enemy.horiz > this.x && enemy.x < this.x + this.horiz)){
+      //console.log('vertical conflict');
+        this.x = this.startX;
+        this.y = this.startY;
+      }
+    }
+  }
+
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var enemyOne = new Enemy(200, 60, 50);
-var enemyTwo = new Enemy(200, 145, 75);
-var enemyThree = new Enemy(200, 230, 75);
+var enemyOne = new Enemy(0, 83);
+var enemyTwo = new Enemy(0, 83*2);
+var enemyThree = new Enemy(0, 83*3);
+//possible function that adds enemies
 allEnemies.push(enemyOne,enemyTwo,enemyThree);
 var player = new playerOne();
 
