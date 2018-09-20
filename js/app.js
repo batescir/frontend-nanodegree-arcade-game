@@ -33,6 +33,7 @@ Enemy.prototype.update = function(dt) {
       this.x += this.speed * dt;
     }
     else {
+      //resets enemy bug to left position
       this.speed = Math.floor((Math.random() * 400) + 100);
       this.x = this.left;
     }
@@ -43,6 +44,7 @@ Enemy.prototype.update = function(dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+    //console.log(this.y);
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -77,10 +79,11 @@ class playerOne {
       }
     }
     if(input === 'up'){
-      if(this.y > this.vert){
+      if(this.y > 0){
       //checkboundry
       this.y -= this.vert;
       }
+
     }
     if(input === 'down'){
       if(this.y < this.vert * 5){
@@ -94,16 +97,20 @@ class playerOne {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
   // keyboard inputs
+
 }
 
 playerOne.prototype.update = function(){
   //console.log(this.x);
   for(let enemy of allEnemies){
-    if(this.y === enemy.y && (enemy.x + enemy.horiz > this.x && enemy.x < this.x + this.horiz)){
+    if(this.y === enemy.y && (enemy.x + enemy.horiz/2 > this.x && enemy.x < this.x + this.horiz/2)){
       //console.log('vertical conflict');
         this.x = this.startX;
         this.y = this.startY;
       }
+    }
+    if(this.y === 83){
+      console.log('WINNER WINNER');
     }
   }
 
