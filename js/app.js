@@ -1,22 +1,20 @@
-//grid 505x536
-//101x83 - ever other move
-//sharded area start
+//Some gameboard parameters
+//grid size - 505x536
+//101 - horizontal / 83 vertical - grid/move
 
 // Enemies our player must avoid
 var Enemy = function(startX, startY) {
     // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
     //randomize start
     this.x = Math.floor((Math.random() * 5) + 0) * 101;
     this.y = startY;
     //randomize speed(make this vary everytime Enemy is drawn)
     this.speed = Math.floor((Math.random() * 400) + 100);
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    // The image/sprite for our enemies
     this.sprite = 'images/enemy-bug.png';
-    //grid measurment
+    //grid horizontal measurment
     this.horiz = 101;
-    //Left boundary
+    //Left boundary placing the enemy out of view
     this.left = -101;
     //right boundary
     this.right = this.horiz * 5;
@@ -34,12 +32,10 @@ Enemy.prototype.update = function(dt) {
     }
     else {
       //resets enemy bug to left position
+      //speed is redefined each time an enemy is released
       this.speed = Math.floor((Math.random() * 400) + 100);
       this.x = this.left;
     }
-    // if enemy still inbounds
-      //move forward
-      //increment x by s
 };
 
 // Draw the enemy on the screen, required method for game
@@ -54,17 +50,23 @@ Enemy.prototype.render = function() {
 
 class playerOne {
   constructor() {
+    //define horizontal movement for player
     this.horiz = 101;
+    //define vertical movement for player
     this.vert = 83;
+    //start horizontal position for player
     this.startX = this.horiz * 2;
+    //stary vertical position for player
     this.startY = this.vert * 5;
+    //assign start values to begin game
     this.x = this.startX;
     this.y = this.startY;
-    console.log(this.x);
-    console.log(this.y);
+    //Player win setting
+    this.won = false;
+    //sprite to render
     this.sprite = 'images/char-boy.png';
   }
-  //update position
+  //update position based on keystrokes
   handleInput(input){
     if(input === 'left'){
       if(this.x > 0){
@@ -93,15 +95,14 @@ class playerOne {
     }
   }
   render() {
+    //draw player
     //taken from enemy sample
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
-  // keyboard inputs
-
 }
 
 playerOne.prototype.update = function(){
-  //console.log(this.x);
+  //Check for collisions
   for(let enemy of allEnemies){
     if(this.y === enemy.y && (enemy.x + enemy.horiz/2 > this.x && enemy.x < this.x + this.horiz/2)){
       //console.log('vertical conflict');
@@ -109,22 +110,27 @@ playerOne.prototype.update = function(){
         this.y = this.startY;
       }
     }
-    if(this.y === 83){
-      console.log('WINNER WINNER');
+    //see if player has won and reset
+    if(this.y === 0){
+      this.won = true;
     }
   }
 
 
 // Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 var allEnemies = [];
 var enemyOne = new Enemy(0, 83);
 var enemyTwo = new Enemy(0, 83*2);
 var enemyThree = new Enemy(0, 83*3);
-//possible function that adds enemies
+
+// Place all enemy objects in an array called allEnemies
 allEnemies.push(enemyOne,enemyTwo,enemyThree);
+
+// Place the player object in a variable called player
 var player = new playerOne();
+
+//possible function that adds enemies
+//** finish everything else **//
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

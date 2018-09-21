@@ -1,3 +1,29 @@
 body {
     text-align: center;
 }
+
+.modal-master {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hide {
+  display: none;
+}
+
+.modal {
+  width: 60%;
+  margin: 25% auto;
+  background-color: #fff;
+  color: #ddd;
+  font-family: sans-serif;
+}
+
+.modal h1 {
+  font-size: 28px;
+}
