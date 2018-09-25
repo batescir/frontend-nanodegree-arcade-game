@@ -2,7 +2,6 @@
 //grid size - 505x536
 //101 - horizontal / 83 vertical - grid/move
 
-
 // Enemies our player must avoid
 var Enemy = function(startX, startY) {
     // Variables applied to each of our instances go here,
@@ -117,7 +116,9 @@ class playerOne {
     // player starting coordinates
     this.x = this.startX;
     this.y = this.startY;
+    //remove win
     this.won = false;
+    //reset lives count
     this.lives = this.startLives;
   }
 }
@@ -138,8 +139,6 @@ playerOne.prototype.update = function(){
     }
   }
 
-
-
 // Now instantiate your objects.
 var allEnemies = [];
 var enemyOne = new Enemy(0, 83);
@@ -151,8 +150,6 @@ allEnemies.push(enemyOne,enemyTwo,enemyThree);
 
 // Place the player object in a variable called player
 var player = new playerOne();
-//possible function that adds enemies
-//** finish everything else **//
 
 
 // This listens for key presses and sends the keys to your

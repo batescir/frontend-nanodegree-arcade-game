@@ -1,18 +1,4 @@
-frontend-nanodegree-arcade-game
-===============================
-
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
-
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
-
-
-Resources -
-referenced Arcade Game Walkthrough series by Mathew Conrad at
-https://matthewcranford.com/
-
-pause animation
-
-# Memory Game Project
+# Frontend-Nanodegree-Arcade-Game
 
 ## Table of Contents
 
@@ -31,40 +17,47 @@ Traditional memory game, user turns over cards two at a time. If cards do not ma
 
 Loading the page prepares the games for play.
 
-Selecting the first card starts the timer.
+The player is at the bottom of the screen.
 
-User flips cards two at a time trying to match cards. User tries to remember where cards are when there is a turn with out a match.
+Enemys move across the screen. The user must try to avoid them while trying to get to the upper portion of the screen for water.
 
-The game is over once the user has matched all the cards. The timer will stop and time and score will be displayed.
+User uses: Up Arrrow, Down Arrow, Left Arrow and Right Arrow to control his player.
 
-Goal: Fewest moves
+The Player has 3 lives. When you collide with and enemy you will lose a life and be returned to bottom of screen.
+
+if you fail modal will appearing giving you option to play again.
+
+Goal: Get from the lower edge of the screen to the upper edge without colliding with a enemy.
+
+If you make it a modal will appearing giving you option to play again.
 
 ## Scoring
 
-* Less than 16 moves - 3 stars
-* 16 to 23 moves - 2 stars
-* more than 23 moves - 1 star
+* No scoring just make it to the water on the upperside of the board with the 3 lives provided.
 
 ## Dependencies
 
-* bootstrap/font awesome for icons - stars
-* Google Fonts - coda
 * starter files provided by Udacity
+* images ()
+
+## Resources - files I referenced
+
+* Arcade Game Walkthrough series by Mathew Conrad at
+https://matthewcranford.com/
+
+* Adding images to divs
+https://stackoverflow.com/questions/7802744/adding-an-img-element-to-a-div-with-javascript
 
 ## Project Instructions
 
 Udacity -
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
 
 ## Contributing
 
 Udacity -
 
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

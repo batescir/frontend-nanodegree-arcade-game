@@ -30,10 +30,7 @@ var Engine = (function(global) {
 
         playagain.addEventListener('click', function() {
           modal.classList.toggle('hide');
-          player.reset();
-          console.log('reset');
-          renderLives();
-          win.requestAnimationFrame(main);
+          init();
         });
 
     //construct 'lives' indicator with 3 lives.
@@ -135,6 +132,7 @@ var Engine = (function(global) {
      */
     function init() {
         lastTime = Date.now();
+        player.reset();
         renderLives();
         main();
     }
@@ -236,7 +234,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-boy-proxy.png'
     ]);
     Resources.onReady(init);
 
