@@ -2,6 +2,7 @@ body {
     text-align: center;
 }
 
+/* modal holder and background */
 .modal-master {
   height: 100%;
   width: 100%;
@@ -12,10 +13,12 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* hide class for toggle (liked this simple method from matt crawford - have switched a couple at work) */
 .hide {
   display: none;
 }
 
+/* modal itself */
 .modal {
   width: 60%;
   margin: 25% auto;
@@ -27,18 +30,12 @@ body {
   border: 2px solid #c33;
 }
 
+/* win or lose message */
 .modal h1 {
-  font-size: 32px;
+  font-size: 30px;
 }
 
-.loser {
-
-}
-
-.winner {
-
-}
-
+/* button to reset the game */
 button {
   color: #c33;
   font-size: 18px;
@@ -46,8 +43,10 @@ button {
   text-transform: uppercase;
   border-radius: 8px;
   border: 2px solid #c33;
+  cursor: pointer;
 }
 
+/* box that holds 'lives' */
 .lives-count {
   width: 505px;
   height: 100px;

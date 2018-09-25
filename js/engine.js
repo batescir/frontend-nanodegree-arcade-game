@@ -26,6 +26,7 @@ var Engine = (function(global) {
         id;
 
         var modal = document.querySelector('.modal-master');
+        var message = document.getElementById('message');
         var playagain = document.querySelector('.playagain');
 
         playagain.addEventListener('click', function() {
@@ -49,7 +50,7 @@ var Engine = (function(global) {
 
     //loop through number of player lives to create row
     var proxy = player.proxy;
-    const initLives = player.lives;
+    var initLives = player.lives;
 
     //create player images on edge of board to represent 'lives'
     function renderLives() {
@@ -107,12 +108,16 @@ var Engine = (function(global) {
           //remove life
           removeLife();
           //display game lost modal
+          message.innerText = "GAME OVER!";
+          playagain.innerText = "try again";
           modal.classList.toggle('hide');
           //stop animation
           win.cancelAnimationFrame(id);
         }
         else if (player.won === true){
           //display game lost modal
+          message.innerText = "CONGRATULATIONS!!!";
+          playagain.innerText = "play again";
           modal.classList.toggle('hide');
           //stop animation
           win.cancelAnimationFrame(id);
