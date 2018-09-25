@@ -19,11 +19,38 @@ body {
 .modal {
   width: 60%;
   margin: 25% auto;
-  background-color: #fff;
-  color: #ddd;
+  padding: 20px;
+  color: #039;
   font-family: sans-serif;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 2px solid #c33;
 }
 
 .modal h1 {
-  font-size: 28px;
+  font-size: 32px;
+}
+
+.loser {
+
+}
+
+.winner {
+
+}
+
+button {
+  color: #c33;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  border-radius: 8px;
+  border: 2px solid #c33;
+}
+
+.lives-count {
+  width: 505px;
+  height: 100px;
+  margin: 0 auto;
+  text-align: left;
 }

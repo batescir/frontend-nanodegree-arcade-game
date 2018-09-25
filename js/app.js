@@ -2,6 +2,7 @@
 //grid size - 505x536
 //101 - horizontal / 83 vertical - grid/move
 
+
 // Enemies our player must avoid
 var Enemy = function(startX, startY) {
     // Variables applied to each of our instances go here,
@@ -63,8 +64,16 @@ class playerOne {
     this.y = this.startY;
     //Player win setting
     this.won = false;
+    //player lives start
+    this.startLives = 3;
+    //player lives
+    this.lives = this.startLives;
+    //player collisions
+    this.collision = false;
     //sprite to render
     this.sprite = 'images/char-boy.png';
+    //lives display proxy
+    this.proxy = 'images/char-boy-proxy.png';
   }
   //update position based on keystrokes
   handleInput(input){
@@ -84,6 +93,10 @@ class playerOne {
       if(this.y > 0){
       //checkboundry
       this.y -= this.vert;
+      //see if player has won and reset
+      if(this.y === 0){
+        this.won = true;
+      }
       }
 
     }
@@ -93,11 +106,19 @@ class playerOne {
       this.y += this.vert;
       }
     }
+
   }
   render() {
     //draw player
     //taken from enemy sample
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
+  reset() {
+    // player starting coordinates
+    this.x = this.startX;
+    this.y = this.startY;
+    this.won = false;
+    this.lives = this.startLives;
   }
 }
 
@@ -105,16 +126,18 @@ playerOne.prototype.update = function(){
   //Check for collisions
   for(let enemy of allEnemies){
     if(this.y === enemy.y && (enemy.x + enemy.horiz/2 > this.x && enemy.x < this.x + this.horiz/2)){
-      //console.log('vertical conflict');
-        this.x = this.startX;
-        this.y = this.startY;
+      //Collision detected
+      //remove life from player
+      this.lives = this.lives - 1;
+      //convert collision indicator to true
+      this.collision = true;
+      //reset player position
+      this.x = this.startX;
+      this.y = this.startY;
       }
     }
-    //see if player has won and reset
-    if(this.y === 0){
-      this.won = true;
-    }
   }
+
 
 
 // Now instantiate your objects.
@@ -128,9 +151,9 @@ allEnemies.push(enemyOne,enemyTwo,enemyThree);
 
 // Place the player object in a variable called player
 var player = new playerOne();
-
 //possible function that adds enemies
 //** finish everything else **//
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

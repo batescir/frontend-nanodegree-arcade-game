@@ -25,9 +25,57 @@ var Engine = (function(global) {
         lastTime,
         id;
 
+        var modal = document.querySelector('.modal-master');
+        var playagain = document.querySelector('.playagain');
+
+        playagain.addEventListener('click', function() {
+          modal.classList.toggle('hide');
+          player.reset();
+          console.log('reset');
+          renderLives();
+          win.requestAnimationFrame(main);
+        });
+
+    //construct 'lives' indicator with 3 lives.
+
+    var container = doc.createElement('div');
+    var livesContainer = doc.createElement('div');
+    livesContainer.classList.add('lives-count');
+
+    doc.body.appendChild(container);
+    container.appendChild(canvas);
+    container.appendChild(livesContainer);
+
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+
+
+    //loop through number of player lives to create row
+    var proxy = player.proxy;
+    const initLives = player.lives;
+
+    //create player images on edge of board to represent 'lives'
+    function renderLives() {
+      //clear lives on reset of game;
+      while (livesContainer.firstChild) {
+        livesContainer.removeChild(livesContainer.firstChild);
+      }
+      //loop through creating a visual rep of lives left
+      for (var cnt = 0; cnt < initLives; cnt++) {
+          var life = document.createElement("img");
+          life.src = proxy;
+          life.alt = (cnt + 1) + ' life';
+          livesContainer.appendChild(life);
+      }
+    }
+
+    //removes life as player collides with bugs
+    function removeLife() {
+        //resets active state of collision
+        player.collision = false;
+        //removes one of the proxy images
+        livesContainer.removeChild(livesContainer.firstChild);
+    }
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -39,7 +87,6 @@ var Engine = (function(global) {
          * would be the same for everyone (regardless of how fast their
          * computer is) - hurray time!
          */
-        const modal = document.querySelector('.modal-master');
 
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
@@ -58,12 +105,27 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        if (player.won === true){
-          win.cancelAnimationFrame(id);
+        if (player.lives <= 0) {
+          //Player used all lives
+          //remove life
+          removeLife();
+          //display game lost modal
           modal.classList.toggle('hide');
+          //stop animation
+          win.cancelAnimationFrame(id);
+        }
+        else if (player.won === true){
+          //display game lost modal
+          modal.classList.toggle('hide');
+          //stop animation
+          win.cancelAnimationFrame(id);
         }
         else {
+          if (player.collision === true) {
+            removeLife();
+          }
           id = win.requestAnimationFrame(main);
+          //console.log(modal.classList);
         }
     }
 
@@ -72,8 +134,8 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
         lastTime = Date.now();
+        renderLives();
         main();
     }
 
@@ -163,14 +225,6 @@ var Engine = (function(global) {
         });
 
         player.render();
-    }
-
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
-     */
-    function reset() {
-        // noop
     }
 
     /* Go ahead and load all of the images we know we're going to need to
