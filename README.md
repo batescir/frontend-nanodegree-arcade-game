@@ -3,7 +3,7 @@
 ## Table of Contents
 
 * [Description](#description)
-* [How to Play](#howtoplay)
+* [Running/Playing the game](#howtoplay)
 * [Scoring](#scoring)
 * [Dependencies](#dependencies)
 * [Project Instructions](#instructions)
@@ -13,11 +13,15 @@
 
 Traditional memory game, user turns over cards two at a time. If cards do not match the cards flip back over and user chooses two more cards. If there is a match the cards stay revealed. User continues play until all cards are matched.
 
-## How to Play
+## Running/Playing the game
 
-Loading the page prepares the games for play.
+Load /index.html in your browser
+
+Loading index will begin the game with the player on the screen and the enemy bugs moving across the screen.
 
 The player is at the bottom of the screen.
+
+The bugs move at random speeds and move left to right.
 
 Enemys move across the screen. The user must try to avoid them while trying to get to the upper portion of the screen for water.
 
